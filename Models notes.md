@@ -8,7 +8,7 @@
 * Age
 * **Posts**
 
-### Post
+### Article
 * Id
 * Title
 * Content
