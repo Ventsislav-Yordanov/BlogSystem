@@ -11,7 +11,7 @@
 ### Post
 * Id
 * Title
-* Description
+* Content
 * **User**
 * **Tags**
 
