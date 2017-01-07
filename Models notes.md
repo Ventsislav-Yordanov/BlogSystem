@@ -10,7 +10,7 @@
 
 ### Post
 * Id
-* Name
+* Title
 * Description
 * **User**
 * **Tags**
