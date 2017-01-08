@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div style="margin-bottom: 10px">
+        <div class="create-button-container">
             <a href="/articles/create" class="btn btn-primary">Create new article</a>
         </div>
 
