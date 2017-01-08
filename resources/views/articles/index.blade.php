@@ -10,7 +10,9 @@
             <div class="col-md-6 article">
                 @foreach($articles as $article)
                     <div class="panel panel-default">
-                        <div class="panel-heading">{{ $article->title }}</div>
+                        <div class="panel-heading">
+                            <a href="{{ route('show-article', ['id' => $article->id]) }}">{{ $article->title }}</a>
+                        </div>
                         <div class="panel-body">{{ $article->content }}</div>
                     </div>
                 @endforeach

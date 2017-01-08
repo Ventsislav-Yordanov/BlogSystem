@@ -16,4 +16,10 @@ Auth::routes();
 
 Route::get('/', 'ArticlesController@index');
 
-Route::resource('articles', 'ArticlesController');
+
+//Route::resource('articles', 'ArticlesController');
+
+Route::get('articles', 'ArticlesController@index');
+Route::get('articles/create', 'ArticlesController@create');
+Route::post('articles', 'ArticlesController@store');
+Route::get('articles/show/{id}', 'ArticlesController@show')->name('show-article');
