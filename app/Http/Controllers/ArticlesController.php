@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Post;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -34,7 +42,11 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article;
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->save();
+        return redirect()->action('ArticlesController@index');
     }
 
     /**

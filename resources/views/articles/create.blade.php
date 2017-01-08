@@ -3,14 +3,14 @@
 @section('content')
     <div class="row">
         <div class="col-sm-6 col-sm-push-1">
-            <form class="form-horizontal">
+            <form method="post" action="/articles" class="form-horizontal">
                 {{ csrf_field() }}
                 <fieldset>
                     <legend>Create new article</legend>
                     <div class="form-group">
                         <label for="title" class="col-lg-2 control-label">Title</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="title" placeholder="Title">
+                            <input type="text" class="form-control" name="title" id="title" placeholder="Title">
                         </div>
                     </div>
                     <div class="form-group">

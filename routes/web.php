@@ -14,6 +14,6 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'ArticlesController@index');
 
 Route::resource('articles', 'ArticlesController');
