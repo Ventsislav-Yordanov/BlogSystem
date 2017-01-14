@@ -7,6 +7,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $article->title }}</div>
                     <div class="panel-body">{{ $article->content }}</div>
+                    <div class="panel-footer">
+                        @foreach ($article->tags as $tag)
+                            <span class="label label-primary">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
