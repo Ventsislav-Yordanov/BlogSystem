@@ -12,7 +12,7 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $article = new Article();
             $article->title = 'Article ' . $i;
             $article->content = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
