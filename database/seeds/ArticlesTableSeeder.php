@@ -20,6 +20,7 @@ class ArticlesTableSeeder extends Seeder
             electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
             sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including 
             versions of Lorem Ipsum.';
+        $article1->user_id = 1;
         $article1->save();
         $article1->tags()->sync([1, 2]);
 
@@ -31,6 +32,7 @@ class ArticlesTableSeeder extends Seeder
             electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
             sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including 
             versions of Lorem Ipsum.';
+        $article2->user_id = 1;
         $article2->save();
         $article2->tags()->sync([3, 4]);
 
@@ -42,6 +44,7 @@ class ArticlesTableSeeder extends Seeder
             electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
             sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including 
             versions of Lorem Ipsum.';
+        $article3->user_id = 1;
         $article3->save();
         $article3->tags()->sync([5]);
     }

@@ -18,6 +18,9 @@
                             @foreach ($article->tags as $tag)
                                 <span class="label label-primary">{{ $tag->name }}</span>
                             @endforeach
+                            <div>
+                                Written by: {{ $article->user->name }}
+                            </div>
                         </div>
                     </div>
                 @endforeach
