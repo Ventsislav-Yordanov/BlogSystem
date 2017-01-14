@@ -20,7 +20,10 @@ Route::group(['prefix' => 'articles'], function () {
 
     Route::get('/', 'ArticlesController@index');
     Route::get('/create', 'ArticlesController@create');
-    Route::post('', 'ArticlesController@store');
-    Route::get('/show/{article}', 'ArticlesController@show')->name('show-article');
+    Route::post('/', 'ArticlesController@store');
+    Route::get('/{article}', 'ArticlesController@show')->name('show.article');
+    Route::get('/{article}/edit', 'ArticlesController@edit')->name('edit.article');
+    Route::put('/{article}', 'ArticlesController@update')->name('update.article');
+    Route::delete('/{article}', 'ArticlesController@destroy')->name('delete.article');
 
 });

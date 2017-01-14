@@ -37,7 +37,7 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,14 +45,19 @@ class ArticlesController extends Controller
         $article = new Article;
         $article->title = $request->input('title');
         $article->content = $request->input('content');
-        $article->save();
+        try {
+            $article->saveOrFail();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
         return redirect()->action('ArticlesController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
@@ -63,34 +68,48 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        try {
+            $article->saveOrFail();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        return redirect()->action('ArticlesController@index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        try {
+            $article->delete();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        return redirect()->action('ArticlesController@index');
     }
 }
