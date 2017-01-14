@@ -16,10 +16,11 @@ Auth::routes();
 
 Route::get('/', 'ArticlesController@index');
 
+Route::group(['prefix' => 'articles'], function () {
 
-//Route::resource('articles', 'ArticlesController');
+    Route::get('/', 'ArticlesController@index');
+    Route::get('/create', 'ArticlesController@create');
+    Route::post('', 'ArticlesController@store');
+    Route::get('/show/{article}', 'ArticlesController@show')->name('show-article');
 
-Route::get('articles', 'ArticlesController@index');
-Route::get('articles/create', 'ArticlesController@create');
-Route::post('articles', 'ArticlesController@store');
-Route::get('articles/show/{id}', 'ArticlesController@show')->name('show-article');
+});
