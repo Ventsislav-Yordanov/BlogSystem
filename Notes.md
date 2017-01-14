@@ -19,10 +19,6 @@
 * Name
 * **Posts**
 
-<br/>
-
-**TODO:** Maybe add likes later
-
 # Functionality
 * Show notification messages (When user is login, logout, register. When new article is created, updated, deleted, etc.)
 * Use pagination
