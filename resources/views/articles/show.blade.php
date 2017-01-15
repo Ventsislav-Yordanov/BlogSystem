@@ -18,15 +18,17 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <form method="post" action="/articles/{{ $article->id }}">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <a class="btn btn-primary" href="{{ route('edit.article', ['id' => $article->id]) }}">Edit</a>
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+        @if ($article->user->id == Auth::id())
+            <div class="row">
+                <div class="col-sm-12">
+                    <form method="post" action="/articles/{{ $article->id }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <a class="btn btn-primary" href="{{ route('edit.article', ['id' => $article->id]) }}">Edit</a>
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection
