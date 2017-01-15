@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -74,9 +74,7 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        if ($article->user->id != Auth::id()) {
-            abort(403, 'You cannot edit an article which is not written by you!');
-        }
+        $this->CheckIsForbidden($article);
 
         return view('articles.edit', compact('article'));
     }
@@ -90,9 +88,7 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        if ($article->user->id != Auth::id()) {
-            abort(403, 'You cannot edit an article which is not written by you!');
-        }
+        $this->CheckIsForbidden($article);
 
         $article->title = $request->input('title');
         $article->content = $request->input('content');
@@ -113,9 +109,7 @@ class ArticlesController extends Controller
      */
     public function destroy(Article $article)
     {
-        if ($article->user->id != Auth::id()) {
-            abort(403, 'You cannot delete an article which is not written by you!');
-        }
+        $this->CheckIsForbidden($article);
 
         try {
             $article->delete();
@@ -124,5 +118,15 @@ class ArticlesController extends Controller
         }
 
         return redirect()->action('ArticlesController@index');
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function CheckIsForbidden(Article $article)
+    {
+        if ($article->user->id != Auth::id()) {
+            abort(403, 'Access to this resource on the server is denied!');
+        }
     }
 }
