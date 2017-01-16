@@ -84,6 +84,7 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+//        dd($request->input('tags'));
         $this->CheckIsForbidden($article);
         $this->TryToSaveArticleToDatabase($request, $article);
         return redirect()->action('ArticlesController@index');
@@ -129,6 +130,10 @@ class ArticlesController extends Controller
         $article->user_id = Auth::id();
         try {
             $article->saveOrFail();
+            if ($request->input('tags') == null) {
+                $article->tags()->sync([]);
+            }
+
             if ($request->has('tags')) {
                 $article->tags()->sync($request->input('tags'));
             }

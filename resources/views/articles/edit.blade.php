@@ -46,3 +46,11 @@
         </div>
     </div>
 @endsection
+
+@section('footer')
+    <script type="text/javascript">
+        $('select').select2({
+            placeholder: 'Choose the tags'
+        });
+    </script>
+@endsection
