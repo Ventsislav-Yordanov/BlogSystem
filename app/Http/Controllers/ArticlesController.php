@@ -129,7 +129,9 @@ class ArticlesController extends Controller
         $article->user_id = Auth::id();
         try {
             $article->saveOrFail();
-            $article->tags()->sync($request->input('tags'));
+            if ($request->has('tags')) {
+                $article->tags()->sync($request->input('tags'));
+            }
         } catch (\Exception $e) {
             dd($e);
         }
