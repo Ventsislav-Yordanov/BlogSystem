@@ -24,6 +24,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="select" class="col-lg-2 control-label">Tags</label>
+                        <div class="col-lg-10">
+                            <select multiple="" class="form-control" name="tags[]">
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="reset" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Submit</button>

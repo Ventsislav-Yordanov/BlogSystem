@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +33,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = Tag::all();
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -44,14 +46,7 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         $article = new Article;
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-        try {
-            $article->saveOrFail();
-        } catch (\Exception $e) {
-            dd($e);
-        }
-
+        $this->TryToSaveArticleToDatabase($request, $article);
         return redirect()->action('ArticlesController@index');
     }
 
@@ -74,9 +69,10 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
+        $tags = Tag::all();
+        $selectedTags = $article->tags->pluck('id');
         $this->CheckIsForbidden($article);
-
-        return view('articles.edit', compact('article'));
+        return view('articles.edit', compact('article', 'tags', 'selectedTags'));
     }
 
     /**
@@ -89,15 +85,7 @@ class ArticlesController extends Controller
     public function update(Request $request, Article $article)
     {
         $this->CheckIsForbidden($article);
-
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-        try {
-            $article->saveOrFail();
-        } catch (\Exception $e) {
-            dd($e);
-        }
-
+        $this->TryToSaveArticleToDatabase($request, $article);
         return redirect()->action('ArticlesController@index');
     }
 
@@ -127,6 +115,23 @@ class ArticlesController extends Controller
     {
         if ($article->user->id != Auth::id()) {
             abort(403, 'Access to this resource on the server is denied!');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param Article $article
+     */
+    public function TryToSaveArticleToDatabase(Request $request, Article $article)
+    {
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->user_id = Auth::id();
+        try {
+            $article->saveOrFail();
+            $article->tags()->sync($request->input('tags'));
+        } catch (\Exception $e) {
+            dd($e);
         }
     }
 }
