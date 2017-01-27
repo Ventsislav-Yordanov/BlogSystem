@@ -22,7 +22,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(5);
         return view('articles.index', compact('articles'));
     }
 
@@ -84,7 +84,6 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-//        dd($request->input('tags'));
         $this->CheckIsForbidden($article);
         $this->TryToSaveArticleToDatabase($request, $article);
         return redirect()->action('ArticlesController@index');
@@ -115,7 +114,7 @@ class ArticlesController extends Controller
      */
     public function getArticlesByTag(Tag $tag)
     {
-        $articles = $tag->articles;
+        $articles = $tag->articles()->paginate(5);
         return view('articles.byTag', compact('articles'));
     }
 
