@@ -48,6 +48,7 @@ class ArticlesController extends Controller
     {
         $article = new Article;
         $this->TryToSaveArticleToDatabase($request, $article);
+        $request->session()->flash('message', 'The article was successfully created!');
         return redirect()->action('ArticlesController@index');
     }
 
@@ -87,6 +88,7 @@ class ArticlesController extends Controller
     {
         $this->CheckIsForbidden($article);
         $this->TryToSaveArticleToDatabase($request, $article);
+        $request->session()->flash('message', 'The article was successfully updated!');
         return redirect()->action('ArticlesController@index');
     }
 
@@ -96,12 +98,13 @@ class ArticlesController extends Controller
      * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Request $request, Article $article)
     {
         $this->CheckIsForbidden($article);
 
         try {
             $article->delete();
+            $request->session()->flash('message', 'The article was successfully deleted!');
         } catch (\Exception $e) {
             dd($e);
         }
