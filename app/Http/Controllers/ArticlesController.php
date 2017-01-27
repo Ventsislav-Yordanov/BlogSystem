@@ -23,6 +23,7 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::paginate(5);
+        $articles->setPath('articles');
         return view('articles.index', compact('articles'));
     }
 
