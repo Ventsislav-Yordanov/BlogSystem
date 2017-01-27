@@ -7,7 +7,7 @@
         </div>
 
         @if(session()->has('message'))
-            <div class="alert alert-dismissible alert-info">
+            <div class="alert alert-dismissible alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{session('message')}}
             </div>
@@ -20,4 +20,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <script type="text/javascript">
+        $('.alert').delay(2000).fadeOut('fast');
+    </script>
 @endsection
