@@ -110,6 +110,16 @@ class ArticlesController extends Controller
     }
 
     /**
+     * @param Tag $tag
+     * @return int|mixed|static
+     */
+    public function getArticlesByTag(Tag $tag)
+    {
+        $articles = $tag->articles;
+        return view('articles.byTag', compact('articles'));
+    }
+
+    /**
      * @param Article $article
      */
     public function CheckIsForbidden(Article $article)

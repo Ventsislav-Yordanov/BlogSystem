@@ -26,4 +26,6 @@ Route::group(['prefix' => 'articles'], function () {
     Route::put('/{article}', 'ArticlesController@update')->name('update.article');
     Route::delete('/{article}', 'ArticlesController@destroy')->name('delete.article');
 
+    Route::get('/tags/{tag}', 'ArticlesController@getArticlesByTag')->name('byTag.article');
+
 });
